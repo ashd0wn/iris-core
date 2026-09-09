@@ -1,4 +1,4 @@
-module github.com/datarhei/core/v16
+﻿module github.com/ashd0wn/iris-core/v16
 
 go 1.21.0
 
@@ -106,3 +106,4 @@ require (
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
+
