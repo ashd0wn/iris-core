@@ -1,4 +1,4 @@
-.DS_Store
+﻿.DS_Store
 .env
 /core*
 /import*
@@ -16,3 +16,9 @@
 *.flv
 
 .VSCodeCounter
+
+# iris-ui build artifacts
+app/ui/dist/*
+!app/ui/dist/.gitkeep
+!app/ui/dist/.gitignore
+
