@@ -1,4 +1,4 @@
-// @title datarhei Core API
+﻿// @title datarhei Core API
 // @version 3.0
 // @description Expose REST API for the datarhei Core
 
@@ -69,6 +69,7 @@ import (
 
 	// Expose the API docs
 	_ "github.com/datarhei/core/v16/docs"
+	irisui "github.com/ashd0wn/iris-core/v16/app/ui"
 )
 
 var ListenAndServe = http.ListenAndServe
@@ -354,8 +355,20 @@ func NewServer(config Config) (Server, error) {
 		s.router.Use(s.middleware.cors)
 	}
 
-	// Add static routes
-	if path, target := config.Router.StaticRoute(); len(target) != 0 {
+	// Iris: check for embedded UI first (-tags embed), then fall back to filesystem
+	if embeddedFS := irisui.UIHandler(); embeddedFS != nil {
+		// Embedded mode: serve UI from binary via go:embed
+		const uiPath = "/ui"
+		group := s.router.Group(uiPath)
+		group.Use(middleware.AddTrailingSlashWithConfig(middleware.TrailingSlashConfig{
+			Skipper: func(c echo.Context) bool {
+				return uiPath != c.Request().URL.Path
+			},
+			RedirectCode: 301,
+		}))
+		group.GET("/*", echo.WrapHandler(http.StripPrefix(uiPath, http.FileServer(embeddedFS))))
+	} else if path, target := config.Router.StaticRoute(); len(target) != 0 {
+		// Filesystem mode: serve UI from CORE_ROUTER_UI_PATH (unchanged)
 		group := s.router.Group(path)
 		group.Use(middleware.AddTrailingSlashWithConfig(middleware.TrailingSlashConfig{
 			Skipper: func(c echo.Context) bool {
