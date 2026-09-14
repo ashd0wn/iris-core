@@ -69,7 +69,7 @@ import (
 
 	// Expose the API docs
 	_ "github.com/datarhei/core/v16/docs"
-	irisui "github.com/ashd0wn/iris-core/v16/app/ui"
+	irisui "github.com/datarhei/core/v16/app/ui"
 )
 
 var ListenAndServe = http.ListenAndServe
