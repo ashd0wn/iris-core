@@ -1,4 +1,4 @@
-﻿// Package ui provides the web interface for Iris.
+// Package ui provides the web interface for Iris.
 // Build with -tags embed to embed the UI into the binary.
 // Without the tag, the UI is served from CORE_ROUTER_UI_PATH.
 package ui

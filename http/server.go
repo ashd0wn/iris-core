@@ -1,4 +1,4 @@
-﻿// @title datarhei Core API
+// @title datarhei Core API
 // @version 3.0
 // @description Expose REST API for the datarhei Core
 

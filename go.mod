@@ -1,4 +1,4 @@
-﻿module github.com/ashd0wn/iris-core/v16
+module github.com/ashd0wn/iris-core/v16
 
 go 1.21.0
 
